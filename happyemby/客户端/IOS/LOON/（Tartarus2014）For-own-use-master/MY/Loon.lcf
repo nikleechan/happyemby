@@ -1,0 +1,159 @@
+[Rule]
+# > 订阅更新
+DOMAIN-SUFFIX,dash.toyairport.top,PROXY
+# > 通用
+OR,((DEST-PORT,25),(DEST-PORT,110),(DEST-PORT,143)),DIRECT
+AND,((OR,((DOMAIN,time-ios.apple.com), (DOMAIN,time.apple.com), (DOMAIN-SUFFIX,pool.ntp.org))), (DEST-PORT,123)),DIRECT
+DOMAIN-KEYWORD,gitlab,PROXY
+DOMAIN-SUFFIX,jsdelivr.net,PROXY
+
+FINAL,FINAL
+
+[Proxy]
+
+[Remote Proxy]
+Chen =  https://suo.yt/W7BkpTS,udp=true,block-quic=true,fast-open=true,vmess-aead=default,skip-cert-verify=default,enabled=true,flexible-sni=false
+Bywave =  https://suo.yt/W7BkpTS,udp=true,block-quic=true,fast-open=true,vmess-aead=default,skip-cert-verify=default,enabled=true,flexible-sni=false
+FlowerCloud =  https://suo.yt/W7BkpTS,udp=true,block-quic=true,fast-open=true,vmess-aead=default,skip-cert-verify=default,enabled=true,flexible-sni=false
+ShiYanTian =  https://suo.yt/W7BkpTS,udp=true,block-quic=true,fast-open=true,vmess-aead=default,skip-cert-verify=default,enabled=true,flexible-sni=false
+nerwo = https://suo.yt/W7BkpTS,udp=true,block-quic=true,fast-open=true,vmess-aead=default,skip-cert-verify=default,enabled=true,flexible-sni=false
+Nex =  https://suo.yt/W7BkpTS,udp=true,block-quic=true,fast-open=true,vmess-aead=default,skip-cert-verify=default,enabled=true,flexible-sni=false
+
+[General]
+# IPv6 支持
+ip-mode = dual
+ipv6-vif = auto
+# UDP相关
+disable-stun = true
+udp-fallback-mode = REJECT
+# SNI辅助规则匹配
+sni-sniffing = true
+# 策略组切换时关闭连接
+disconnect-on-policy-change = true
+# 域名拦截行为
+domain-reject-mode = DNS
+dns-reject-mode = LoopbackIP
+# > 跳过代理
+# 跳过某个域名或者 IP 段，这些目标主机将不会由 Loon Proxy 处理。
+skip-proxy = 192.168.0.0/16,10.0.0.0/8,172.16.0.0/12,localhost,*.local,e.crashlynatics.com
+# > Always Real IP Hosts
+# DNS 数据包将被转发到上游 DNS 服务器。
+real-ip = *.apple.com,*apple.com
+# 绕过路由
+bypass-tun = 10.0.0.0/8,100.64.0.0/10,127.0.0.0/8,169.254.0.0/16,172.16.0.0/12,192.0.0.0/24,192.0.2.0/24,192.88.99.0/24,192.168.0.0/16,198.51.100.0/24,203.0.113.0/24,224.0.0.0/4,255.255.255.255/32
+# DNS 服务器
+dns-server = 223.5.5.5,180.184.1.1
+# doh-server = https://223.5.5.5/dns-query, https://8.8.8.8/dns-query
+# Hijack DNS
+# 默认情况下，Loon 只返回发送到 Loon DNS 地址的 DNS 查询的假 IP 地址(198.18.0.2)。
+# 有些设备或软件总是使用硬编码的 DNS 服务器。 (例如 Google Speakers 总是使用 8.8.8.8)。 您可以使用此选项劫持查询，以获得一个假地址。
+hijack-dns = 8.8.8.8:53,8.8.4.4:53
+# Wi-Fi 访问
+allow-wifi-access = false
+wifi-access-http-port = 1234
+wifi-access-socks5-port = 1235
+mitm-on-wifi-access = false
+# 代理测速 URL
+internet-test-url = http://connectivitycheck.platform.hicloud.com/generate_204
+proxy-test-url = http://detectportal.firefox.com/success.txt
+# 测速超时 (s)
+test-timeout = 5
+# 网络接口
+interface-mode = auto
+# ssid-trigger参数，用于指定SSID下流量模式切换，（default表示默认，cellular表示蜂窝，目前支持三种值：rule，direct，proxy） 
+# ssid-trigger = "default":rule, "cellular":rule,"ASUS_5G":direct
+# 解析器
+resource-parser = https://raw.githubusercontent.com/sub-store-org/Sub-Store/release/sub-store-parser.loon.min.js
+
+[Proxy Group]
+FINAL = select, DIRECT, PROXY, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+PROXY = select, HK, SG, JP, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Proxy.png
+Emby = select, HK, SG, US, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Emby.png
+HK = select, Nex-HK, Bywave-HK, SYT-HK, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HK.png
+SG = select, Nex-SG, Bywave-SG, SYT-SG, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/SG.png
+JP = select, Nex-JP, Bywave-JP, SYT-JP, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png
+US = select, Nex-US, Bywave-US, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/US.png
+Nex-HK = fallback, Nex-香港, interval = 600, max-timeout = 3000, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HK.png
+Bywave-HK = fallback, Bywave-香港, interval = 600, max-timeout = 3000, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HK.png
+SYT-HK = fallback, SYT-香港, interval = 600, max-timeout = 3000, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/HK.png
+Nex-SG = fallback, Nex-新加坡, interval = 600,max-timeout = 3000, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/SG.png
+Bywave-SG = fallback, Bywave-新加坡, interval = 600, max-timeout = 3000, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/SG.png
+SYT-SG = fallback, SYT-新加坡, interval = 600, max-timeout = 3000, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/SG.png
+Nex-JP = fallback, Nex-日本, interval = 600, max-timeout = 3000, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png
+Bywave-JP = fallback, Bywave-新加坡, interval = 600, max-timeout = 3000, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png
+SYT-JP = fallback, SYT-日本, interval = 600, max-timeout = 3000, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/JP.png
+Nex-US = fallback, Nex-美国, interval = 600, max-timeout = 3000, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/US.png
+Bywave-US = fallback, ywave-美国, interval = 600, max-timeout = 3000, img-url = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/US.png
+
+[Remote Filter]
+Nex-香港 = NameRegex, Chen, FilterKey = "Hong Kong 0[345]"
+Bywave-香港 = NameRegex, Bywave, FilterKey = "香港0[234]"
+SYT-香港 = NameRegex, ShiYanTian, FilterKey = "香港 0[1234]"
+Nex-日本 = NameRegex, Chen, FilterKey = "Japan 0[345]"
+Bywave-日本 = NameRegex, Bywave, FilterKey = "东京0[12]"
+SYT-日本 = NameRegex, ShiYanTian, FilterKey = "日本"
+Nex-新加坡 = NameRegex, Chen, FilterKey = "Singapore 0[345]"
+Bywave-新加坡 = NameRegex, Bywave, FilterKey = "新加坡0[12]"
+SYT-新加坡 = NameRegex, ShiYanTian, FilterKey = "狮城"
+Nex-美国 = NameRegex, Chen, FilterKey = "USA Seattle 0[345]"
+Bywave-美国 = NameRegex, Bywave, FilterKey = "芝加哥|洛杉矶"
+Nex-德国 = NameRegex, Chen, FilterKey = "Germany 0[12]"
+
+[Host]
+
+[Rewrite]
+
+[Script]
+
+[Remote Rule]
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/LocalAreaNetwork.list, policy=DIRECT, tag=LAN, enabled=true
+https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Advertising.list, policy=REJECT, tag=Reject, enabled=true
+https://raw.githubusercontent.com/ConnersHua/RuleGo/master/Surge/Ruleset/Extra/Reject/Tracking.list, policy=REJECT, tag=Reject, enabled=true
+https://kelee.one/Tool/Loon/Lsr/AI.lsr, policy=SG, tag=AI, enabled=true
+https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Rule/Media/Spotify.lsr, policy=DIRECT, tag=Spotify, enabled=true
+https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Rule/Apple/TestFlight.lsr, policy=PROXY, tag=TestFlight, enabled=true
+https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Rule/Apple/Apple.lsr, policy=DIRECT, tag=Apple, enabled=true
+https://raw.githubusercontent.com/Tartarus2014/For-own-use/master/Ruleset/PT/PT_Direct.list, policy=DIRECT, tag=PT, enabled=true
+https://raw.githubusercontent.com/Tartarus2014/For-own-use/master/Ruleset/PT/PT.list, policy=SG, tag=PT, enabled=true
+https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Rule/Media/TikTok.lsr, policy=JP, tag=TikTok, enabled=true
+https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Rule/Other/Telegram.lsr, policy=PROXY, tag=Telegram, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyGFWlist.list, policy=PROXY, tag=PROXY, enabled=true
+https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/ProxyLite.list, policy=PROXY, tag=PROXY, enabled=true
+https://raw.githubusercontent.com/Tartarus2014/For-own-use/master/Ruleset/Proxy.list, policy=PROXY, tag=PROXY, enabled=true
+https://raw.githubusercontent.com/Tartarus2014/For-own-use/refs/heads/master/Loon/Rule/Direct.lsr, policy=DIRECT, tag=DIRECT, enabled=true
+https://raw.githubusercontent.com/Tartarus2014/Loon-Script/refs/heads/master/Rule/GEOIP.lsr, policy=DIRECT, tag=GEOIP_CN, enabled=true
+
+[Plugin]
+https://raw.githubusercontent.com/Script-Hub-Org/Script-Hub/main/modules/script-hub.loon.plugin, policy=PROXY, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Block_HTTPDNS.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/BlockAdvertisers.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Remove_ads_by_keli.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/JD_remove_ads.lpx, enabled=true
+https://raw.githubusercontent.com/Tartarus2014/For-own-use/refs/heads/master/Loon/Plugin/JD.plugin, enabled=true
+https://kelee.one/Tool/Loon/Lpx/VVebo_repair.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/SF-Express_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/PinDuoDuo_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/FleaMarket_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Douyu_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/QQMusic_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/DiDi_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/JiaKaoBaoDian_remove_ads.lpx, enabled=false
+https://kelee.one/Tool/Loon/Lpx/Amap_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/HUPU_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/RedPaper_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/WexinMiniPrograms_Remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Cainiao_remove_ads.lpx, enabled=true
+https://raw.githubusercontent.com/app2smile/rules/master/plugin/qidian.plugin, enabled=true
+https://github.com/BiliUniverse/Redirect/releases/latest/download/BiliBili.Redirect.plugin, enabled=true
+https://github.com/BiliUniverse/ADBlock/releases/latest/download/BiliBili.ADBlock.plugin, enabled=true
+https://github.com/BiliUniverse/Enhanced/releases/latest/download/BiliBili.Enhanced.plugin, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Tieba_remove_ads.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Weixin_external_links_unlock.lpx, enabled=true
+https://kelee.one/Tool/Loon/Lpx/Node_detection_tool.lpx, enabled=true
+https://raw.githubusercontent.com/chavyleung/scripts/master/box/rewrite/boxjs.rewrite.loon.plugin, enabled=true
+
+[Mitm]
+skip-server-cert-verify = true
+ca-passphrase = 4AB42EEF
+ca-p12 = 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
+hostname =
