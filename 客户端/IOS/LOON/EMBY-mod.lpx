@@ -3,10 +3,10 @@
 #!system = iOS,iPadOS,tvOS,macOS
 #!system_version = 
 #!loon_version = 3.3.2(877)
-#!icon = https://raw.githubusercontent.com/nikleechan/happyemby/master/（Tartarus2014）For-own-use-master/Color/EMBY.png
+#!icon = https://github.com/nikleechan/happyemby/blob/29a1f0c23b32e611f4c07a9429ffa5a3d6ac1d4c/%E5%AE%A2%E6%88%B7%E7%AB%AF/IOS/LOON/%EF%BC%88Tartarus2014%EF%BC%89For-own-use-master/Color/EMBY.png
 
 [Script]
-http-response ^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice requires-body=true, script-path=https://raw.githubusercontent.com/Tartarus2014/Script/master/Emby.js, tag=embyUnlocked
+http-response ^https?:\/\/mb3admin.com\/admin\/service\/registration\/validateDevice requires-body=true, script-path=https://github.com/nikleechan/happyemby/blob/main/%E5%AE%A2%E6%88%B7%E7%AB%AF/IOS/LOON/Emby.js, tag=embyUnlocked
 
 [MITM]
 hostname = mb3admin.com
